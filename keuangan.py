@@ -5,9 +5,10 @@ from datetime import datetime
 import pandas as pd
 import altair as alt
 
-# Setup Google Sheets access
+# ✅ Setup Google Sheets access via Streamlit secrets
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+key_dict = st.secrets["gcp_service_account"]
+creds = ServiceAccountCredentials.from_json_keyfile_dict(key_dict, scope)
 client = gspread.authorize(creds)
 
 # URL dan worksheet
